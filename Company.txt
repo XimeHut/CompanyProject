@@ -1,0 +1,70 @@
+CREATE DATABASE Company;
+USE CGMB;
+CREATE TABLE Departamento(ndepto VARCHAR(20) NOT NULL,
+			nombred VARCHAR(15) NOT NULL,
+			admin VARCHAR(20) NOT NULL,
+			fecha_inicio VARCHAR(20) NOT NULL, 
+			PRIMARYKEY(ndepto),
+			FOREIGNKEY(admin)REFERENCES Empleado(nss));
+
+CREATE TABLE Departamento(ndepto VARCHAR(20) NOT NULL,
+			nombred VARCHAR(15) NOT NULL,
+			admin VARCHAR(20) NOT NULL,
+			fechai VARCHAR(20) NOT NULL, 
+			PRIMARY KEY(ndpeto));
+
+AlTER TABLE Departamento ADD FOREIGN KEY(admin)REFERENCES Empleado(nss);
+
+
+
+CREATE TABLE Localidad(numerod VARCHAR(20) NOT NULL,
+			nombred VARCHAR(20) NOT NULL,
+			direccionl VARCHAR(20) NOT NULL,
+			teléfono VARHAR(20) NOT NULL,			
+			FOREIGN KEY(numerod) REFERENCES Departamento(ndepto));
+
+CREATE TABLE proyecto(numeroP VARCHAR(20) NOT NULL, 
+		     nombreP VARCHAR(15) NOT NULL,
+		     localidadP VARCHAR(20) NOT NULL,
+		     numerod VARCHAR(20) NOT NULL, 
+		     PRIMARY KEY(numeroP),
+		     FOREIGN KEY(numerod) REFERENCES Departamento(ndepto));
+
+CREATE TABLE Empleado (nss VARCHAR(20) NOT NULL, 
+			nombree VARCHAR(15) NOT NULL,
+			direccion VARCHAR (20) NOT NULL,		
+			fecha_n VARCHAR(20) NOT NULL,
+			sexoe VARCHAR(8) NOT NULL,
+			salario DECIMAL(8,2) NOT NULL,		
+			admin VARCHAR (20) NOT NULL,
+			numerod VARCHAR (20) NOT NULL,
+			PRIMARY KEY(nss),
+			FOREIGN KEY(admin) REFERENCES Empleado(nss),
+			FOREIGN KEY(numerod) REFERENCES Departamento(ndepto));
+
+CREATE TABLE Empleado (nss VARCHAR(8) NOT NULL, 
+			nombree VARCHAR(15) NOT NULL,
+			direccion VARCHAR (8) NOT NULL,		
+			fecha_n VARCHAR(20) NOT NULL,
+			sexoe VARCHAR(8) NOT NULL,
+			salario DECIMAL(8,2) NOT NULL,		
+			admin VARCHAR (8) NOT NULL,
+			numerod VARCHAR (8) NOT NULL,
+			PRIMARY KEY(nss),
+
+ALTER TABLE Empleado ADD FOREIGN KEY(admin) REFERENCES Empleado(nss);
+ALTER TABLE Empleado ADD FOREIGN KEY(numerod) REFERENCES Departamento(ndpeto);
+
+CREATE TABLE Dependiente(nombreD VARCHAR(20) NOT NULL,
+			fecha VARCHAR(20) NOT NULL,
+			sexo VARCHAR(8) NOT NULL,
+			parentesco VARCHAR(20) NOT NULL,
+			nss VARCHAR(8) NOT NULL,
+			FOREIGN KEY(nss)REFERENCES Empleado(nss);
+
+CREATE TABLE Trabaja(numeroe VARCHAR(8) NOT NULL,
+			nproyecto VARCHAR(20) NOT NULL,
+			horas INT(8) NOT NULL,
+			FOREIGN KEY(numeroe)REFERENCES Empleado(nss),
+			FOREIGN KEY(nproyecto)REFERENCES Proyecto(numeroP),
+			PRIMARY KEY(numeroe,nproyecto));
